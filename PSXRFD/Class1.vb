@@ -18,7 +18,8 @@
         Dim result As String = Nothing
 
         Try
-            Dim pattern As String = "(SCUS|SLES|SLUS|SCPS|SCKA|SCED|SCEL|SCAS|SCAA|SCAJ|SLPS)-\d{5}"
+            ' Updated pattern to support both SCUS/SLES/SLUS and SCES_023.80 formats
+            Dim pattern As String = "((SCUS|SLES|SLUS|SCES)_\d{3}\.\d{2}|(SCPS|SCKA|SCED|SCEL|SCAS|SCAA|SCAJ|SLPS)-\d{5})"
             Dim regex As New System.Text.RegularExpressions.Regex(pattern)
 
             Using fs As New IO.FileStream(filePath, IO.FileMode.Open, IO.FileAccess.Read)
@@ -42,6 +43,9 @@
 
                         For Each match As System.Text.RegularExpressions.Match In matches
                             Dim matchValue As String = match.Value
+                            ' Replace underscore "_" with hyphen "-"
+                            matchValue = matchValue.Replace("_", "-").Replace(".", "")
+
                             If result Is Nothing Then
                                 result = matchValue
                                 Console.WriteLine($"Found: {result}")
