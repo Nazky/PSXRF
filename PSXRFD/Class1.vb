@@ -19,7 +19,7 @@
 
         Try
             ' Updated pattern to support both SCUS/SLES/SLUS and SCES_023.80 formats
-            Dim pattern As String = "((SCUS|SLES|SLUS|SCES)_\d{3}\.\d{2}|(SCPS|SCKA|SCED|SCEL|SCAS|SCAA|SCAJ|SLPS)-\d{5})"
+            Dim pattern As String = "((SCUS|SLES|SLUS|SCES|SCPS|SCKA|SCED|SCEL|SCAS|SCAA|SCAJ|SLPS|SLPM)_\d{3}\.\d{2}|(SCUS|SLES|SLUS|SCES|SCPS|SCKA|SCED|SCEL|SCAS|SCAA|SCAJ|SLPS|SLPM)-\d{5})"
             Dim regex As New System.Text.RegularExpressions.Regex(pattern)
 
             Using fs As New IO.FileStream(filePath, IO.FileMode.Open, IO.FileAccess.Read)
